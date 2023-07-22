@@ -69,9 +69,12 @@ set.seed(42)
 clothing_nobs = nrow(clothing)
 print(clothing_nobs)
 clothing_train_no = sample(nrow(clothing), 0.7*clothing_nobs) #get random numbers range(1, nrow(clothing)) and get 0.7*clothing_nobs of them
-clothing_validate_no = sample(setdiff(seq_len(nrow(clothing)),clothing_train_no), 0.30*clothing_nobs) #???
-training_data=clothing[clothing_train_no,]
+clothing_validate_no = sample(setdiff(seq_len(nrow(clothing)),clothing_train_no), 0.30*clothing_nobs) #From same dataset get 0.3*clothing_nobs number in the range(1, nrow(clothing)) -> no duplications from clothing_train_no
+training_data=clothing[clothing_train_no,] # Return the rows with the indecies from clothing_train_no
 validation_data=clothing[clothing_validate_no,]
-attach(training_data)
-
+attach(training_data) #Add this to R (?) so we can call its column names as variables
+length(unique(HHKEY)) #Get how many unique values are in HHKEY
+data_one=training_data[RESP==1,] #Return the rows where RESP==1
+tr=training_data[,-1:-2] #Get dataframe but without the first to second column
+print(names(tr)) 
 
