@@ -64,7 +64,7 @@ imputed4 = impute(airquality, cols = list(Ozone = imputeNormal())) #Imputed with
 clothing = read.csv(file="C:/Users/fredd/Documents/Data-Mining/Sprint_2/Data/clothing_store.txt") # load dataset
 names(clothing) # Get column names
 
-#b)
+#d)
 set.seed(42)
 clothing_nobs = nrow(clothing)
 print(clothing_nobs)
@@ -72,9 +72,23 @@ clothing_train_no = sample(nrow(clothing), 0.7*clothing_nobs) #get random number
 clothing_validate_no = sample(setdiff(seq_len(nrow(clothing)),clothing_train_no), 0.30*clothing_nobs) #From same dataset get 0.3*clothing_nobs number in the range(1, nrow(clothing)) -> no duplications from clothing_train_no
 training_data=clothing[clothing_train_no,] # Return the rows with the indecies from clothing_train_no
 validation_data=clothing[clothing_validate_no,]
+
+#e)
 attach(training_data) #Add this to R (?) so we can call its column names as variables
 length(unique(HHKEY)) #Get how many unique values are in HHKEY
+
+#g)
 data_one=training_data[RESP==1,] #Return the rows where RESP==1
 tr=training_data[,-1:-2] #Get dataframe but without the first to second column
-print(names(tr)) 
+tr=tr[,-1]
+val=validation_data[,-1]
+val=val[,-1]
+
+#h)
+hi_trans=log(HI) #take the log of every entry in HI
+tr=tr[,-45] #get dataframe without column HI (45)
+tr=data.frame(tr,hi_trans) #create a dataframe with tr and then append hi_trans
+hist(hi_trans) 
+
+write.table(tr,"tr_clothing_prepared.txt",row.names=FALSE) #safe as table
 
