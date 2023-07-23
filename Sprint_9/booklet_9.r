@@ -16,7 +16,7 @@ churnfactor= factor(train$Churn.)
 churnfactor2=factor(test$Churn.)
 test2=data.frame(test, churnfactor2)
 
-rf2 =randomForest(churnfactor ~ .,data=train, method="class")
+rf2 =randomForest(churnfactor ~ .,data=train, method="class") #random forrest
 
 pred3=predict(rf2, test2, type="class")
 print(table(pred3, test2[,"churnfactor2"]))
