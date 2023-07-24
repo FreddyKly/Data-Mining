@@ -1,0 +1,6 @@
+library(arules)
+data(Groceries)
+myrules=apriori(Groceries, parameter=list(supp=0.01,conf=0.05,minlen=3))
+inspect(myrules)
+cc=sort(myrules, by="lift")
+inspect(cc[1:10])

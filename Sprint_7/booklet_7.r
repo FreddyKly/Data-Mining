@@ -11,12 +11,12 @@ validationdata=iris[test.id,]
 tree1 = rpart(Species ~ .,data=iris, method="class", subset=train.id)
 rpart.plot(tree1) # Plot descision tree
 print(summary(trainingdata))
-pred=predict(traintree, iris[-train.id,], type="class") # predict the iris dataset without the training samples (only test-set), with the traintree
+pred=predict(tree1, iris[-train.id,], type="class") # predict the iris dataset without the training samples (only test-set), with the traintree
 print(table(pred, iris[-train.id, "Species"]))
 print(rpart.control()) # Hyperparameters
 
 ### Number 2
-churn=read.csv(file="C:/Users/fredd/Documents/Data-Mining/Sprint_6/Data/churn.txt")
+churn=read.csv(file="C:/Users/fkliemt/Documents/Data-Mining/Sprint_6/Data/churn.txt")
 n = nrow(churn)
 set.seed(42)
 train.id = sample(n, size = 2/3*n)
